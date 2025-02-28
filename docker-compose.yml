@@ -1,0 +1,36 @@
+services:
+  npm:
+    image: 'docker.io/jc21/nginx-proxy-manager:latest'
+    container_name: nginx-proxy-manager
+    restart: always
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - ./data:/data
+      - ./letsencrypt:/etc/letsencrypt
+    networks:
+      my_custom_network:
+        ipv4_address: ${NPM_IP}
+
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - data:/data
+    networks:
+      my_custom_network:
+        ipv4_address: ${PORTAINER_IP}
+
+volumes:
+  data:
+
+
+networks:
+  my_custom_network:
