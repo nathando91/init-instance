@@ -61,6 +61,9 @@ export NVM_DIR="$HOME/.nvm"
 nvm install node # Cài đặt phiên bản mới nhất của Node.js
 nvm use node
 
+sudo apt update
+sudo apt install make
+
 # Hiển thị phiên bản của các phần mềm đã cài đặt
 echo "NodeJS version:"
 node -v
