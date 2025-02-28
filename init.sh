@@ -1,11 +1,18 @@
 #!/bin/bash
 
 # Cập nhật hệ thống
-sudo apt update && sudo apt upgrade -y
-echo "openssh-server openssh-server/sshd_config select true" | sudo debconf-set-selections
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y unattended-upgrades
+sudo apt update
+sudo DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confnew" upgrade
+
+# Cài đặt kernel mới nhất
+sudo DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confnew" install linux-generic
+
+# Cài đặt các tiện ích cần thiết
+sudo DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confnew" install curl wget git zsh
+
+# Cài đặt và cấu hình unattended-upgrades nếu cần
+sudo DEBIAN_FRONTEND=noninteractive apt -y -o Dpkg::Options::="--force-confnew" install unattended-upgrades
 sudo dpkg-reconfigure --frontend=noninteractive unattended-upgrades
-sudo apt upgrade -y
 
 # Cài đặt kernel mới nhất
 sudo apt install -y linux-generic
