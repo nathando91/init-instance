@@ -1,1 +1,8 @@
 .env
+data/
+letsencrypt/
+logs/
+nginx/
+node_modules/
+public/
+tmp/
